@@ -8,12 +8,16 @@ using WinMenu.UI;
 
 namespace WinMenu.Menu
 {
-    internal class Login : MenuBase, IMenuItem
+    internal class Query : MdiMenuBase, IMenuItem
     {
+        public Query(Form parent) : base(parent)
+        {
+        }
+
         public void OnClick(object sender, EventArgs e)
         {
-            var frm = new FrmLogin();
-            frm.ShowDialog();
+            var frm = this.CreateForm<FrmQuery>();
+            frm.Show();
         }
     }
 }

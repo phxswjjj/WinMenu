@@ -30,7 +30,7 @@ namespace WinMenu
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new SecurityMenuStrip();
+            this.menuStrip1 = new WinMenu.Controls.SecurityMenuStrip();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -47,8 +47,10 @@ namespace WinMenu
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.XPath;
+using Unity;
 
 namespace WinMenu.Menu
 {
@@ -35,7 +36,7 @@ namespace WinMenu.Menu
                     }
                 });
 
-                var reader = new XmlTextReader("Menu.xsd");
+                var reader = new XmlTextReader(xsd);
                 var schema = XmlSchema.Read(reader, validateEventHandler);
                 var schemas = new XmlSchemaSet();
                 schemas.Add(schema);
@@ -62,6 +63,7 @@ namespace WinMenu.Menu
 
         private ToolStripMenuItem Create(XElement rootNode)
         {
+            var container = UnityResolver.Create();
             var rootItem = new ToolStripMenuItem();
             rootItem.Text = rootNode.Attribute("Title").Value;
             if (rootNode.HasElements)
@@ -81,10 +83,12 @@ namespace WinMenu.Menu
                     {
                         var a = Assembly.GetCallingAssembly();
                         var s = a.EntryPoint.DeclaringType.Namespace;
-                        typeString = $"{s}.Menu{typeString}";
+                        typeString = $"{s}{typeString}";
                     }
                     var t = Type.GetType(typeString);
-                    var obj = Activator.CreateInstance(t);
+                    if (t == null)
+                        throw new Exception($"{typeString} not defined");
+                    var obj = container.Resolve(t);
                     if (obj is IMenuItem)
                     {
                         var mu = (IMenuItem)obj;

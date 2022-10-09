@@ -16,6 +16,9 @@ namespace WinMenu
         public Form1()
         {
             InitializeComponent();
+
+            UnityResolver.InitMdiForm(this);
+
             InitializeMenu();
         }
 
