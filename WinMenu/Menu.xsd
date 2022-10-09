@@ -5,6 +5,7 @@
 
 	<xs:attributeGroup name="NodeAttributes">
 		<xs:attribute name="Title" type="xs:string" use="required"/>
+		<xs:attribute name="Type" type="xs:string"/>
 	</xs:attributeGroup>
 
 

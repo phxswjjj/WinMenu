@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -69,6 +70,28 @@ namespace WinMenu.Menu
                 {
                     var item = Create(node);
                     rootItem.DropDownItems.Add(item);
+                }
+            }
+            else
+            {
+                var typeString = rootNode.Attribute("Type")?.Value;
+                if (!string.IsNullOrEmpty(typeString))
+                {
+                    if (typeString.StartsWith("."))
+                    {
+                        var a = Assembly.GetCallingAssembly();
+                        var s = a.EntryPoint.DeclaringType.Namespace;
+                        typeString = $"{s}.Menu{typeString}";
+                    }
+                    var t = Type.GetType(typeString);
+                    var obj = Activator.CreateInstance(t);
+                    if (obj is IMenuItem)
+                    {
+                        var mu = (IMenuItem)obj;
+                        rootItem.Click += mu.OnClick;
+                    }
+                    else
+                        throw new Exception($"{typeString} 必須實作 IMenuItem");
                 }
             }
             return rootItem;
