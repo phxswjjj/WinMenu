@@ -1,21 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Schema;
+using System.Xml.XPath;
 
 namespace WinMenu.Menu
 {
     internal class MenuBuilder
     {
-        private XmlDocument Document;
+        private XDocument Document;
 
         internal MenuBuilder LoadConfig(string path)
         {
-            var doc = new XmlDocument();
-            doc.Load(path);
+            ValidationEventHandler validateEventHandler = new ValidationEventHandler((o, e) =>
+            {
+                switch (e.Severity)
+                {
+                    case XmlSeverityType.Error:
+                    case XmlSeverityType.Warning:
+                        throw new Exception(e.Message);
+                }
+            });
+
+            XmlTextReader reader = new XmlTextReader("Menu.xsd");
+            XmlSchema schema = XmlSchema.Read(reader, validateEventHandler);
+            XmlSchemaSet schemas = new XmlSchemaSet();
+            schemas.Add(schema);
+
+            var doc = XDocument.Load(path);
+            doc.Validate(schemas, validateEventHandler);
+
             this.Document = doc;
             return this;
         }
@@ -25,7 +45,7 @@ namespace WinMenu.Menu
             var items = new List<ToolStripMenuItem>();
 
             var doc = this.Document;
-            foreach (XmlNode rootNode in doc.SelectNodes("/Menu/Node"))
+            foreach (var rootNode in doc.XPathSelectElements("/Menu/Node"))
             {
                 var item = Create(rootNode);
                 items.Add(item);
@@ -33,13 +53,14 @@ namespace WinMenu.Menu
 
             return items.ToArray();
         }
-        private static ToolStripMenuItem Create(XmlNode rootNode)
+
+        private ToolStripMenuItem Create(XElement rootNode)
         {
             var rootItem = new ToolStripMenuItem();
-            rootItem.Text = rootNode.Attributes["Title"].Value;
-            if (rootNode.HasChildNodes)
+            rootItem.Text = rootNode.Attribute("Title").Value;
+            if (rootNode.HasElements)
             {
-                foreach (XmlNode node in rootNode.ChildNodes)
+                foreach (var node in rootNode.Elements())
                 {
                     var item = Create(node);
                     rootItem.DropDownItems.Add(item);

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xs:attributeGroup name="NodeAttributes">
+		<xs:attribute name="Title" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+
+
+	<xs:element name="Node">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Node"/>
+			</xs:sequence>
+			<xs:attributeGroup  ref="NodeAttributes"/>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="Menu">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="Node"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
