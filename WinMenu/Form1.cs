@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinMenu.Menu;
 
 namespace WinMenu
 {
@@ -15,6 +16,14 @@ namespace WinMenu
         public Form1()
         {
             InitializeComponent();
+            InitializeMenu();
+        }
+
+        private void InitializeMenu()
+        {
+            var menu = new MenuBuilder()
+                .LoadConfig("Menu.xml");
+            menuStrip1.Items.AddRange(menu.Build());
         }
     }
 }

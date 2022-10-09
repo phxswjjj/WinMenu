@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+	<Node Title="系統">
+		<Node Title="Login"></Node>
+		<Node Title="Logout"></Node>
+	</Node>
+	<Node Title="Query">
+		<Node Title="Query1"></Node>
+		<Node Title="Extand">
+			<Node Title="Query1"></Node>
+		</Node>
+	</Node>
+</Menu>
