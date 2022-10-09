@@ -16,27 +16,32 @@ namespace WinMenu.Menu
     {
         private XDocument Document;
 
-        internal MenuBuilder LoadConfig(string path)
+        internal MenuBuilder LoadXML(string path)
         {
-            ValidationEventHandler validateEventHandler = new ValidationEventHandler((o, e) =>
-            {
-                switch (e.Severity)
-                {
-                    case XmlSeverityType.Error:
-                    case XmlSeverityType.Warning:
-                        throw new Exception(e.Message);
-                }
-            });
-
-            XmlTextReader reader = new XmlTextReader("Menu.xsd");
-            XmlSchema schema = XmlSchema.Read(reader, validateEventHandler);
-            XmlSchemaSet schemas = new XmlSchemaSet();
-            schemas.Add(schema);
-
             var doc = XDocument.Load(path);
-            doc.Validate(schemas, validateEventHandler);
-
             this.Document = doc;
+
+            var xsd = Path.ChangeExtension(path, "xsd");
+            if (File.Exists(xsd))
+            {
+                var validateEventHandler = new ValidationEventHandler((o, e) =>
+                {
+                    switch (e.Severity)
+                    {
+                        case XmlSeverityType.Error:
+                        case XmlSeverityType.Warning:
+                            throw new Exception(e.Message);
+                    }
+                });
+
+                var reader = new XmlTextReader("Menu.xsd");
+                var schema = XmlSchema.Read(reader, validateEventHandler);
+                var schemas = new XmlSchemaSet();
+                schemas.Add(schema);
+
+                doc.Validate(schemas, validateEventHandler);
+            }
+
             return this;
         }
 

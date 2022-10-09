@@ -22,7 +22,7 @@ namespace WinMenu
         private void InitializeMenu()
         {
             var menu = new MenuBuilder()
-                .LoadConfig("Menu.xml");
+                .LoadXML("Menu.xml");
             menuStrip1.Items.AddRange(menu.Build());
         }
     }
