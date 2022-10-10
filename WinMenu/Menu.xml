@@ -2,7 +2,7 @@
 <Menu>
 	<Node Title="系統">
 		<Node Title="Login" Type=".Menu.Login"></Node>
-		<Node Title="Logout"></Node>
+		<Node Title="Logout" Type=".Menu.Logout"></Node>
 	</Node>
 	<Node Title="Query">
 		<Node Title="Query1" Type=".Menu.Query"></Node>

@@ -14,11 +14,12 @@ using Unity;
 
 namespace WinMenu.Menu
 {
-    internal class MenuBuilder
+    internal class SecurityMenuBuilder
     {
         private XDocument Document;
+        private Action<object, ChangeSecurityStateEventArgs> ChangeSecurityStateHandler;
 
-        internal MenuBuilder LoadXML(string path)
+        internal SecurityMenuBuilder LoadXML(string path)
         {
             var doc = XDocument.Load(path);
             this.Document = doc;
@@ -89,16 +90,30 @@ namespace WinMenu.Menu
                     if (t == null)
                         throw new Exception($"{typeString} not defined");
                     var obj = container.Resolve(t);
-                    if (obj is IMenuItem)
+                    if (obj is IMenuItem mu)
                     {
-                        var mu = (IMenuItem)obj;
                         rootItem.Click += mu.OnClick;
                     }
                     else
                         throw new Exception($"{typeString} 必須實作 IMenuItem");
+
+                    if (obj is ISecurityMeunItem smu)
+                        smu.ChangeSecurityState += OnChangeSecurityState;
                 }
             }
             return rootItem;
+        }
+
+        private void OnChangeSecurityState(object sender, ChangeSecurityStateEventArgs e)
+        {
+            if (this.ChangeSecurityStateHandler != null)
+                this.ChangeSecurityStateHandler.Invoke(sender, e);
+        }
+
+        internal SecurityMenuBuilder SetChangeSecurityStateAction(Action<object, ChangeSecurityStateEventArgs> changeSecurityStateAction)
+        {
+            this.ChangeSecurityStateHandler = changeSecurityStateAction;
+            return this;
         }
     }
 }

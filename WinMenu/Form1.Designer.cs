@@ -1,4 +1,4 @@
-﻿using WinMenu.Controls;
+﻿using System.Windows.Forms;
 
 namespace WinMenu
 {
@@ -30,7 +30,7 @@ namespace WinMenu
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new WinMenu.Controls.SecurityMenuStrip();
+            this.menuStrip1 = new MenuStrip();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -59,7 +59,7 @@ namespace WinMenu
 
         #endregion
 
-        private SecurityMenuStrip menuStrip1;
+        private MenuStrip menuStrip1;
     }
 }
 

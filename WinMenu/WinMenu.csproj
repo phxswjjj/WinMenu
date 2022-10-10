@@ -55,9 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\SecurityMenuStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,10 +62,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu\IMenuItem.cs" />
+    <Compile Include="Menu\ISecurityMeunItem.cs" />
     <Compile Include="Menu\Login.cs" />
+    <Compile Include="Menu\Logout.cs" />
     <Compile Include="Menu\MdiMenuBase.cs" />
     <Compile Include="Menu\MenuBase.cs" />
-    <Compile Include="Menu\MenuBuilder.cs" />
+    <Compile Include="Menu\SecurityMenuBuilder.cs" />
     <Compile Include="Menu\Query.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

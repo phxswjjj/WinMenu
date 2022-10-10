@@ -24,9 +24,19 @@ namespace WinMenu
 
         private void InitializeMenu()
         {
-            var menu = new MenuBuilder()
-                .LoadXML("Menu.xml");
-            menuStrip1.Items.AddRange(menu.Build());
+            var menuBuilder = new SecurityMenuBuilder()
+                .LoadXML("Menu.xml")
+                .SetChangeSecurityStateAction(MenuStrip1_ChangeSecurityState);
+
+            menuStrip1.Items.AddRange(menuBuilder.Build());
+        }
+
+        private void MenuStrip1_ChangeSecurityState(object sender, ChangeSecurityStateEventArgs e)
+        {
+            if (e == ChangeSecurityStateEventArgs.Empty)
+                MessageBox.Show("權限異動-Logout");
+            else
+                MessageBox.Show("權限異動-Login");
         }
     }
 }
