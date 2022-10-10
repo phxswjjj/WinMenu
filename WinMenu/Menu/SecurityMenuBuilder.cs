@@ -97,6 +97,8 @@ namespace WinMenu.Menu
                         {
                             mb.ViewMode = (ViewModeType)Enum.Parse(typeof(ViewModeType), viewModeStr);
                             mb.AccessString = rootNode.Attribute("AccessString")?.Value;
+                            if (!string.IsNullOrEmpty(mb.AccessString) && mb.AccessString.StartsWith(":"))
+                                mb.AccessString = $"Func{mb.AccessString}";
                         }
                     }
 
@@ -113,6 +115,8 @@ namespace WinMenu.Menu
                     rootItem.Tag = obj;
                 }
             }
+            if (rootItem.Tag == null)
+                rootItem.Tag = container.Resolve<DefaultMenuItem>();
             return rootItem;
         }
 

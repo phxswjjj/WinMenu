@@ -30,7 +30,7 @@ namespace WinMenu
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new MenuStrip();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -52,6 +52,7 @@ namespace WinMenu
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

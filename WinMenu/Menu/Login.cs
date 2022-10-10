@@ -15,10 +15,13 @@ namespace WinMenu.Menu
         public void OnClick(object sender, EventArgs e)
         {
             var frm = new FrmLogin();
-            frm.ShowDialog();
-            var securityArgs = new ChangeSecurityStateEventArgs();
-            if (this.ChangeSecurityState != null)
-                this.ChangeSecurityState.Invoke(sender, securityArgs);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var securityArgs = new ChangeSecurityStateEventArgs();
+                securityArgs.Data = frm.LoginUser;
+                if (this.ChangeSecurityState != null)
+                    this.ChangeSecurityState.Invoke(sender, securityArgs);
+            }
         }
     }
 }

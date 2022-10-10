@@ -3,7 +3,7 @@
 	<Node Title="系統">
 		<Node Title="Login" Type=".Menu.Login" ViewMode="NotLogin">
 		</Node>
-		<Node Title="Logout" Type=".Menu.Logout" ViewMode="Login"></Node>
+		<Node Title="Logout" Type=".Menu.Logout" ViewMode="OnlyLogin"></Node>
 	</Node>
 	<Node Title="Query">
 		<Node Title="Query1" Type=".Menu.Query"></Node>
@@ -11,6 +11,12 @@
 			<Node Title="Query1" ViewMode="Limit"></Node>
 		</Node>
 		<Node Title="QueryOnlyLogin" Type=".Menu.Query" ViewMode="Login" AccessString=":Query"></Node>
-		<Node Title="QueryOnlyLimit" Type=".Menu.Query" ViewMode="Limit" AccessString=":QueryX"></Node>
+		<Node Title="QueryOnlyLimit" Type=".Menu.Query" ViewMode="Limit" AccessString="User:QueryX"></Node>
+	</Node>
+	<Node Title="Query2">
+		<Node Title="Extand">
+			<Node Title="QueryOnlyLimit" Type=".Menu.Query" ViewMode="Limit" AccessString=":Query"></Node>
+		</Node>
+		<Node Title="QueryOnlyLimit" Type=".Menu.Query" ViewMode="Limit" AccessString=":Query"></Node>
 	</Node>
 </Menu>

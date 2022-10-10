@@ -11,6 +11,7 @@ namespace WinMenu.Menu
     {
         public ViewModeType ViewMode { get; set; } = ViewModeType.Always;
         public string AccessString { get; set; }
+        public bool Visible { get; set; } = true;
     }
 
     public enum ViewModeType
@@ -31,5 +32,9 @@ namespace WinMenu.Menu
         /// 只在登入狀態下顯示，沒權限則看不到
         /// </summary>
         Limit,
+        /// <summary>
+        /// 只在登入狀態下顯示
+        /// </summary>
+        OnlyLogin,
     }
 }

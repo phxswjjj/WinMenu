@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinMenu.Security;
 
 namespace WinMenu.Menu
 {
@@ -16,5 +17,7 @@ namespace WinMenu.Menu
     public class ChangeSecurityStateEventArgs
     {
         public static readonly ChangeSecurityStateEventArgs Empty = new ChangeSecurityStateEventArgs();
+
+        public UserInfo Data { get; internal set; }
     }
 }

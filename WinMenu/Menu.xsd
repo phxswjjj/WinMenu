@@ -8,6 +8,7 @@
 			<xs:enumeration value="Login"></xs:enumeration>
 			<xs:enumeration value="NotLogin"></xs:enumeration>
 			<xs:enumeration value="Limit"></xs:enumeration>
+			<xs:enumeration value="OnlyLogin"></xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	

@@ -8,7 +8,7 @@ using WinMenu.UI;
 
 namespace WinMenu.Menu
 {
-    internal class Query : MdiMenuBase, IMenuItem
+    internal class Query : MdiMenuItemBase, IMenuItem
     {
         public Query(Form parent) : base(parent)
         {

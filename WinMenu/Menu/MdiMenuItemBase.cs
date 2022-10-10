@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace WinMenu.Menu
 {
-    internal abstract class MdiMenuBase : MenuBase
+    internal abstract class MdiMenuItemBase : MenuBase
     {
         protected readonly Form MdiContainer;
 
-        public MdiMenuBase(Form parent)
+        public MdiMenuItemBase(Form parent)
         {
             this.MdiContainer = parent;
         }
