@@ -47,6 +47,8 @@ namespace WinMenu
 
             foreach (ToolStripMenuItem item in mItem.Items)
             {
+                //最大化後會出現功能選單，直接略過
+                if (item.Tag == null) continue;
                 CheckPermission(item, user);
             }
         }
