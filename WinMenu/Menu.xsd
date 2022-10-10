@@ -2,10 +2,21 @@
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
-
+	<xs:simpleType name="ViewModeType" final="restriction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Always"></xs:enumeration>
+			<xs:enumeration value="Login"></xs:enumeration>
+			<xs:enumeration value="NotLogin"></xs:enumeration>
+			<xs:enumeration value="Limit"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
 	<xs:attributeGroup name="NodeAttributes">
 		<xs:attribute name="Title" type="xs:string" use="required"/>
 		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="ViewMode" type="ViewModeType"/>
+		<xs:attribute name="AccessString" type="xs:string"/>
 	</xs:attributeGroup>
 
 

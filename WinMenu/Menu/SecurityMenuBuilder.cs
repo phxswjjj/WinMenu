@@ -90,6 +90,16 @@ namespace WinMenu.Menu
                     if (t == null)
                         throw new Exception($"{typeString} not defined");
                     var obj = container.Resolve(t);
+                    if (obj is MenuBase mb)
+                    {
+                        var viewModeStr = rootNode.Attribute("ViewMode")?.Value;
+                        if (!string.IsNullOrEmpty(viewModeStr))
+                        {
+                            mb.ViewMode = (ViewModeType)Enum.Parse(typeof(ViewModeType), viewModeStr);
+                            mb.AccessString = rootNode.Attribute("AccessString")?.Value;
+                        }
+                    }
+
                     if (obj is IMenuItem mu)
                     {
                         rootItem.Click += mu.OnClick;
@@ -99,6 +109,8 @@ namespace WinMenu.Menu
 
                     if (obj is ISecurityMeunItem smu)
                         smu.ChangeSecurityState += OnChangeSecurityState;
+
+                    rootItem.Tag = obj;
                 }
             }
             return rootItem;
