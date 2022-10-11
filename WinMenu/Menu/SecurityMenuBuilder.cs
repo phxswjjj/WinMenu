@@ -16,6 +16,8 @@ namespace WinMenu.Menu
 {
     internal class SecurityMenuBuilder
     {
+        const string PrefixAccessString = "FUNC";
+
         private XDocument Document;
         private Action<object, ChangeSecurityStateEventArgs> ChangeSecurityStateHandler;
 
@@ -98,7 +100,7 @@ namespace WinMenu.Menu
                             mb.ViewMode = (ViewModeType)Enum.Parse(typeof(ViewModeType), viewModeStr);
                             mb.AccessString = rootNode.Attribute("AccessString")?.Value;
                             if (!string.IsNullOrEmpty(mb.AccessString) && mb.AccessString.StartsWith(":"))
-                                mb.AccessString = $"Func{mb.AccessString}";
+                                mb.AccessString = $"{PrefixAccessString}{mb.AccessString}";
                         }
                     }
 
