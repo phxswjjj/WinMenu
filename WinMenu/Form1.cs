@@ -110,6 +110,9 @@ namespace WinMenu
                             menuData.Visible = false;
                         break;
                     case ViewModeType.Login:
+                        //已登入但未限制
+                        if (user != null && string.IsNullOrEmpty(accessString))
+                            hasPermission = true;
                         if (!hasPermission)
                             mItem.Enabled = false;
                         break;
