@@ -26,9 +26,16 @@
 </Menu>
 ```
 
-Type: 要執行的 MenuItem，由 「.」開頭表示為目前組件下的 namespace，否則為完整組件名稱
+Type: 要執行的 MenuItem，由 「.」開頭表示為目前組件下的 namespace，否則為完整組件名稱，底下兩者結果相同
 > Type=".Menu.Login"
-等同 WinMenu.Menu.Login
+> Type="WinMenu.Menu.Login"
+
+ViewMode:
+- Always: 預設，總是顯示、不檢查權限
+- Login: 限制登入才可使用，顯示灰底、不可操作
+- Limit: 限制登入才可使用，否則不顯示
+- NotLogin: 未登入狀態下才顯示，用在登入
+- OnlyLogin: 登入狀態下才顯示，用在登出
 
 ## Menu
 ![](asserts/form-menu.jpg)
